@@ -133,10 +133,15 @@ public class InjectEditorWindow : EditorWindow
         {
             GUILayout.BeginVertical();
             GUILayout.Label("settings details...");
+            GUILayout.BeginHorizontal();
+            
             if (GUILayout.Button("Reload Methods", GUILayout.Height(25)))
-            {
                 LoadMethods();
-            }
+            
+            if (GUILayout.Button("Reload Fields", GUILayout.Height(25)))
+                LoadFields();
+            
+            GUILayout.EndHorizontal();
             GUILayout.EndVertical();
         }
 
@@ -151,8 +156,10 @@ public class InjectEditorWindow : EditorWindow
         {
             if(injectedMethodsList.Count < 1) LoadMethods();
             
+            var maxSectionHeight = Mathf.Min(injectedFieldsList.Count * 45, Screen.height / 4);
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.ExpandWidth(true),
-                GUILayout.Height(Screen.height / 4));
+                GUILayout.Height(maxSectionHeight));
+
             foreach (var item in injectedMethodsList)
             {
                 string caption = $"{item.Name}:{item.Type}";
@@ -181,8 +188,11 @@ public class InjectEditorWindow : EditorWindow
         if (showFields)
         {
             if(injectedFieldsList.Count < 1) LoadFields();
+
+            var maxSectionHeight = Mathf.Min(injectedFieldsList.Count * 20, Screen.height / 4);
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.ExpandWidth(true),
-                GUILayout.Height(Screen.height / 4));
+                GUILayout.Height(maxSectionHeight));
+            
             foreach (var item in injectedFieldsList)
             {
                 string caption = $"{item.Name}";
