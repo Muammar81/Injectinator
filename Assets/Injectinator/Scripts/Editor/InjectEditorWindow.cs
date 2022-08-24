@@ -34,7 +34,8 @@ public class InjectEditorWindow : EditorWindow
 
     private static InjectEditorWindow window;
 
-    private void Awake() => LoadTextures();
+    private void OnEnable() => LoadTextures();
+
     private void LoadTextures()
     {
         iconTexture = Resources.Load<Texture2D>("icons/inject");
@@ -65,8 +66,6 @@ public class InjectEditorWindow : EditorWindow
         }
 
         //InitLayout();
-
-
         //void InitLayout()
         {
             //Window Setup
@@ -82,7 +81,6 @@ public class InjectEditorWindow : EditorWindow
             //Body
             DrawRects();
             FakeEntries();
-
         }
     }
     private static void FakeEntries()
@@ -100,9 +98,8 @@ public class InjectEditorWindow : EditorWindow
             DrawHeader();
             return;
         }
-
-
-        if (showSettings) DrawBottom();
+        
+        //if (showSettings) DrawBottom();
         DrawHeader();
 
         GUILayout.BeginVertical();
@@ -210,8 +207,6 @@ public class InjectEditorWindow : EditorWindow
         static Assembly GetDefualtAssembly() => AppDomain.CurrentDomain.GetAssemblies().First(assembly => assembly.GetName().Name == "Assembly-CSharp");
         //static IEnumerable<Type> GetTypesInDefaultAssembly<T>() => GetDefualtAssembly().GetTypes().Where(type => typeof(T).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract);
     }
-
-
 }
 public class methodInfo
 {

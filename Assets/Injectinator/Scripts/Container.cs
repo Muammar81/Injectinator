@@ -4,17 +4,18 @@ using System.Linq;
 
 public class Container 
 {
-    private readonly List<ServiceData> _serviceDescriptors;
+    private readonly List<ServiceDescriptor> _serviceDescriptors;
 
-    public Container(List<ServiceData> serviceDescriptors)=> _serviceDescriptors = serviceDescriptors;
+    public Container(List<ServiceDescriptor> serviceDescriptors)=> _serviceDescriptors = serviceDescriptors;
 
-    public object GetService(Type serviceType)
+
+    private object GetService(Type serviceType)
     {
         var desciptor = _serviceDescriptors
             .SingleOrDefault(x => x.ServiceType == serviceType);
 
         if (desciptor == null)
-            throw new Exception($"Unregisteed service: {serviceType.Name}");
+            throw new Exception($"Unregisteed service: {serviceType.Name}. Make sure to register it first using the builder");
 
         if (desciptor.Implementation != null)
             return desciptor.Implementation;
@@ -37,6 +38,11 @@ public class Container
         return implementation;
     }
 
+    /// <summary>
+    /// Returns the service implementation 
+    /// </summary>
+    /// <typeparam name="T">Service type</typeparam>
+    /// <returns></returns>
     public T GetService<T>()
     {
         return (T)GetService(typeof(T));

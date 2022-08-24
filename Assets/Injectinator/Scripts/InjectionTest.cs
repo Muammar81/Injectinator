@@ -12,6 +12,7 @@ public class InjectionTest : MonoBehaviour
         builder.Register<RandomGuidProvider>();
         
         builder.Register<IService, ServiceOne>();
+        
         builder.Register<IRandomGuidProvider, RandomGuidProvider>();
         #endregion Register services
 
@@ -44,6 +45,17 @@ public class ServiceOne : IService
     }
 }
 
+public class MonoService : MonoBehaviour, IService
+{
+    //[Inject]
+    
+    private readonly IRandomGuidProvider _randomGuidProvider;
+    public void Log()
+    {
+        Debug.Log($"Logging from MonoBehaviour{_randomGuidProvider}");
+    }
+}
+
 public interface IRandomGuidProvider
 {
     Guid RandomGuid { get; }
@@ -51,5 +63,5 @@ public interface IRandomGuidProvider
 
 public class RandomGuidProvider : IRandomGuidProvider
 {
-    public Guid RandomGuid { get; } = Guid.NewGuid();
+    public Guid RandomGuid => Guid.NewGuid();
 }
