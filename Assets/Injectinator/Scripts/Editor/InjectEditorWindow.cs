@@ -135,10 +135,10 @@ public class InjectEditorWindow : EditorWindow
             GUILayout.Label("settings details...");
             GUILayout.BeginHorizontal();
             
-            if (GUILayout.Button("Reload Methods", GUILayout.Height(25)))
+            if (GUILayout.Button("Reload Methods", GUILayout.Height(25),GUILayout.Width(Screen.width/2 -5)))
                 LoadMethods();
             
-            if (GUILayout.Button("Reload Fields", GUILayout.Height(25)))
+            if (GUILayout.Button("Reload Fields", GUILayout.Height(25),GUILayout.Width(Screen.width/2 -5)))
                 LoadFields();
             
             GUILayout.EndHorizontal();
