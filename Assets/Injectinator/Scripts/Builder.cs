@@ -5,12 +5,6 @@ using System.Collections.Generic;
     {
         private List<ServiceDescriptor> _services = new List<ServiceDescriptor>();
         
-        public void RegisterSingleton<TService>()=>
-            _services.Add(new ServiceDescriptor(typeof(TService), ServiceLifetime.Singleton));
-        
-        public void RegisterSingleton<TService, TImplementation>() where TImplementation : TService=>
-            _services.Add(new ServiceDescriptor(typeof(TService), typeof(TImplementation), ServiceLifetime.Singleton));
-        
         /// <summary>
         /// Registers dependency services to the services collection
         /// </summary>

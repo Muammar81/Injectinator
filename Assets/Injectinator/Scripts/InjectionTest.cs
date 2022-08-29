@@ -6,15 +6,10 @@ public class InjectionTest : MonoBehaviour
     private void Start()
     {
         var builder = new Builder();
-
-        #region Register Services
-        //Register By type
-        builder.Register<RandomGuidProvider>();
         
+        //Registering services in order from lower to higher level dependency
+        builder.Register<IRandomGuidProvider, RandomGuidProvider>(); 
         builder.Register<IService, ServiceOne>();
-        
-        builder.Register<IRandomGuidProvider, RandomGuidProvider>();
-        #endregion Register services
 
         var container = builder.GenerateContainer();
         var serviceOne = container.GetService<IService>();
