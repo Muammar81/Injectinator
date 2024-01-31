@@ -1,6 +1,10 @@
 using System;
 
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Field)]
-public class Inject : Attribute
+namespace Injectinator.Runtime
 {
+
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Field)]
+    public class Inject : Attribute
+    {
+    }
 }
